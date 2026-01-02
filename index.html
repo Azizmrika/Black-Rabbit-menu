@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Rabbit Coffee Shop - Menu Digital</title>
+    <link rel="icon" type="image/jpeg" href="black.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            background: #000;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #000, #1a1a1a, #000);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #000 0%, #1a1a1a 100%);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 3px solid #8b7bff;
+            animation: slideDown 0.8s ease;
+            position: relative;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(139, 123, 255, 0.5));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        h1 {
+            font-size: 3rem;
+            letter-spacing: 5px;
+            background: linear-gradient(45deg, #fff, #8b7bff, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #ccc;
+            letter-spacing: 3px;
+            margin-top: 0.5rem;
+        }
+
+        .menu-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border: 2px solid #8b7bff;
+            border-radius: 15px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 123, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(139, 123, 255, 0.5);
+            border-color: #ffd700;
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #8b7bff, #6a5bff);
+            border-color: #ffd700;
+            box-shadow: 0 10px 30px rgba(139, 123, 255, 0.6);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .menu-section {
+            display: none;
+            animation: fadeInScale 0.6s ease;
+        }
+
+        .menu-section.active {
+            display: block;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .section-header {
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #8b7bff 0%, #6a5bff 100%);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .section-title {
+            font-size: 3rem;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .menu-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border: 2px solid #8b7bff;
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(139, 123, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .menu-card:hover::before {
+            opacity: 1;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(139, 123, 255, 0.4);
+            border-color: #ffd700;
+        }
+
+        .item-title {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-price {
+            font-size: 1.6rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .item-desc {
+            color: #ccc;
+            line-height: 1.6;
+            margin-top: 0.5rem;
+            font-family: Arial, sans-serif;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .category-header {
+            background: linear-gradient(90deg, #8b7bff, #6a5bff);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            margin: 2rem 0 1.5rem 0;
+            text-align: center;
+            font-size: 2rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            box-shadow: 0 10px 30px rgba(139, 123, 255, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .size-options {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .size-badge {
+            background: #ffd700;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .highlight-item {
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+        }
+
+        footer {
+            background: #000;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+            border-top: 3px solid #8b7bff;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .section-title { font-size: 2rem; }
+            .menu-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            .nav-btn { padding: 0.8rem 1.5rem; font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+
+    <header class="header">
+        <svg class="logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(100, 100)">
+                <ellipse cx="-25" cy="-55" rx="12" ry="40" fill="white" transform="rotate(-20 -25 -55)"/>
+                <ellipse cx="25" cy="-55" rx="12" ry="40" fill="white" transform="rotate(20 25 -55)"/>
+                <ellipse cx="0" cy="-15" rx="35" ry="40" fill="white"/>
+                <ellipse cx="-25" cy="-55" rx="6" ry="25" fill="#8b7bff" transform="rotate(-20 -25 -55)"/>
+                <ellipse cx="25" cy="-55" rx="6" ry="25" fill="#8b7bff" transform="rotate(20 25 -55)"/>
+                <circle cx="12" cy="-20" r="4" fill="#000"/>
+                <ellipse cx="20" cy="-8" rx="3" ry="4" fill="#000"/>
+                <path d="M 20 -5 Q 15 0 10 -2" stroke="#000" stroke-width="2" fill="none"/>
+                <path d="M -20 10 Q 0 25 20 10" fill="white"/>
+            </g>
+        </svg>
+        <h1>BLACK RABBIT</h1>
+        <p class="subtitle">COFFEE SHOP</p>
+    </header>
+
+    <nav class="menu-nav">
+        <button class="nav-btn active" onclick="showSection('breakfast')">🥐 Petits Déjeuners</button>
+        <button class="nav-btn" onclick="showSection('hot-drinks')">☕ Hot Drinks</button>
+        <button class="nav-btn" onclick="showSection('cold-drinks')">🧊 Cold Drinks</button>
+        <button class="nav-btn" onclick="showSection('food')">🍽️ So Tasty</button>
+        <button class="nav-btn" onclick="showSection('desserts')">🍰 So Yummy</button>
+    </nav>
+
+    <div class="container">
+        <!-- PETITS DÉJEUNERS -->
+        <section id="breakfast" class="menu-section active">
+            <div class="section-header">
+                <h2 class="section-title">LES PETITS DÉJEUNER</h2>
+            </div>
+
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Petit déjeuner express</span>
+                        <span class="item-price">9 DT</span>
+                    </div>
+                    <p class="item-desc">Un croissant ou cake / Une boisson chaude / Un jus frais / Eau 2/1L</p>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Waffle Addict</span>
+                        <span class="item-price">15 DT</span>
+                    </div>
+                    <p class="item-desc">Un croissant ou cake / Une boisson chaude / Un jus frais / Eau 2/1L / Waffle (aux fruit de saison / chocolat / caramel beurre salé / chantilly / fruit sec) / Pot de yaourt</p>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Fresh toast addict</span>
+                        <span class="item-price">15 DT</span>
+                    </div>
+                    <p class="item-desc">Un croissant ou cake / Une boisson chaude / Un jus frais / Eau 2/1L / Pain perdu aux fruits de saison (chocolat / caramel beurre salé / chantilly / fruit sec) pot de yaourt</p>
+                </div>
+
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Tasty dreaming</span>
+                        <span class="item-price">19 DT</span>
+                    </div>
+                    <p class="item-desc">Un croissant ou cake / Une boisson chaude / Un jus frais / Eau 2/1L / Omlette du Black Rabbit / Poulet panne / Kaucots rouge / Salade / Pain complet / Fromage frais</p>
+                </div>
+
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Wake up</span>
+                        <span class="item-price">19 DT</span>
+                    </div>
+                    <p class="item-desc">Un croissant ou cake / Une boisson chaude / Un jus frais / Eau 2/1L / Oeufs brouillés ou oeufs à la coque / Jambon de compagne / Gruyère / Haricot rouge / Salade / Pain complet / Fromage frais</p>
+                </div>
+
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Club Sando</span>
+                        <span class="item-price">22 DT</span>
+                    </div>
+                    <p class="item-desc">Un croissant ou cake / Une boisson chaude / Un jus frais / Eau 2/1L / Goufre façon chef / Club sandwich (au jambon / omelette / fromage) / Salade / Fromage frais</p>
+                </div>
+
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Croissant Addict</span>
+                        <span class="item-price">15 DT</span>
+                    </div>
+                    <p class="item-desc">Une boisson chaude / Un jus frais / Eau 2/1L / Croissant salés façon Black Rabbit / Salade</p>
+                </div>
+
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Black Rabbit Brunch (for two)</span>
+                        <span class="item-price">37 DT</span>
+                    </div>
+                    <p class="item-desc">Deux boissons chaudes / Deux jus frais / Eau plate 1L / Gaufre (choco / caramel / miel / fruits / fruits sec / chantilly) / Poulet crispy / Omelette maison / Jambon / 2 mini bowly / Fromage frais / Haricots rouge / Salade / Toast / Cake ou croissant / Scramble egg toast</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOT DRINKS -->
+        <section id="hot-drinks" class="menu-section">
+            <div class="section-header">
+                <h2 class="section-title">HOT DRINKS</h2>
+            </div>
+
+            <h3 class="category-header">Classic Hot Drinks</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Espresso</span>
+                        <span class="item-price">3,5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Double Espresso</span>
+                        <span class="item-price">4,5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Espresso Macchiato</span>
+                        <span class="item-price">4 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Americano</span>
+                        <span class="item-price">4 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Cappuccino</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">S: 8 DT</span>
+                        <span class="size-badge">M: 9,5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Vanilla Latte</span>
+                        <span class="item-price">7 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Latte Macchiato</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">4,5 DT</span>
+                        <span class="size-badge">5,5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Hot Chocolate</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">9 DT</span>
+                        <span class="size-badge">10,5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Tea</span>
+                        <span class="item-price">4 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Nespresso</span>
+                        <span class="item-price">6 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Classic Macchiato</h3>
+            <div class="menu-grid">
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Classic Macchiato</span>
+                    </div>
+                    <p class="item-desc">Chocolate / Moka / Hazelnut / Caramel</p>
+                    <div class="size-options">
+                        <span class="size-badge">8,5 DT</span>
+                        <span class="size-badge">10 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Special Macchiato</h3>
+            <div class="menu-grid">
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Special Macchiato</span>
+                    </div>
+                    <p class="item-desc">Nutella / Speculos / Pistachio / Vanilla</p>
+                    <div class="size-options">
+                        <span class="size-badge">10 DT</span>
+                        <span class="size-badge">11,5 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Black Rabbit Hot</h3>
+            <div class="menu-grid">
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Matcha</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">10 DT</span>
+                        <span class="size-badge">11,5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>V Go Coffee</span>
+                        <span class="item-price">14,5 DT</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COLD DRINKS -->
+        <section id="cold-drinks" class="menu-section">
+            <div class="section-header">
+                <h2 class="section-title">COLD DRINKS</h2>
+            </div>
+
+            <h3 class="category-header">Frappuccino</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Chocolate / Moka / Hazelnut</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">10 DT</span>
+                        <span class="size-badge">11,5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Strawberry / Caramel</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">11 DT</span>
+                        <span class="size-badge">12,5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Speculos / Nutella / Snikers</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">12 DT</span>
+                        <span class="size-badge">13,5 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Classic Ice Coffee</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Ice Americano</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">5 DT</span>
+                        <span class="size-badge">6 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Ice Latte</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">6 DT</span>
+                        <span class="size-badge">7 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Ice Macchiato</h3>
+            <div class="menu-grid">
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Chocolate / Moka / Hazelnut / Caramel</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">8 DT</span>
+                        <span class="size-badge">9,5 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Ice</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Chocolate / Cookies / Vanilla</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">8 DT</span>
+                        <span class="size-badge">6 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Noisette / Speculos</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">10 DT</span>
+                        <span class="size-badge">11,5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Matcha</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">10 DT</span>
+                        <span class="size-badge">11,5 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Energetic Mojitos</h3>
+            <div class="menu-grid">
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Red / Blue / Classic / Pinacolada</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">13 DT</span>
+                        <span class="size-badge">14,5 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Classic Mojito</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Red / Blue / Classic / Pinacolada / Blue Berry</span>
+                    </div>
+                    <p class="item-desc">Mangue / Banane / Black Currant / Passion Fruit</p>
+                    <div class="size-options">
+                        <span class="size-badge">10 DT</span>
+                        <span class="size-badge">11,5 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Juices</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Orange</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">5 DT</span>
+                        <span class="size-badge">6 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Citronade</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">5 DT</span>
+                        <span class="size-badge">6,5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Fraise / Kiwi / Banane / Ice B / Green B</span>
+                    </div>
+                    <div class="size-options">
+                        <span class="size-badge">7 DT - 9 DT</span>
+                        <span class="size-badge">8,5 DT - 10,5 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Milkshake</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Oreo / Nutella / Speculos</span>
+                        <span class="item-price">10 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Pistachio</span>
+                        <span class="item-price">12 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Black Rabbit</span>
+                        <span class="item-price">14 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Milkshake</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Oreo / Nutella / Speculos</span>
+                        <span class="item-price">10 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Pistachio</span>
+                        <span class="item-price">12 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Black Rabbit</span>
+                        <span class="item-price">14 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Smoothies</h3>
+            <div class="menu-grid">
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Smoothies</span>
+                        <span class="item-price">14 DT</span>
+                    </div>
+                    <p class="item-desc">Fraise / Cassis / Pinacolada / Blue Berry / Mangue / Banane / Black Currant / Passion Fruit</p>
+                </div>
+            </div>
+
+            <h3 class="category-header">Soft Drinks</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Eau Plate</span>
+                        <span class="item-price">3,5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>1/2 Eau</span>
+                        <span class="item-price">2 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Soda</span>
+                        <span class="item-price">4,5 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Extra</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Sirop</span>
+                        <span class="item-price">3 DT</span>
+                    </div>
+                    <p class="item-desc">Caramel / Hazelnut / Chocolat / Strawberry</p>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Non Dairy Milk</span>
+                        <span class="item-price">3 DT</span>
+                    </div>
+                    <p class="item-desc">Lait d'Amande / Avoine</p>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Crème Chantilly</span>
+                        <span class="item-price">3 DT</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOD -->
+        <section id="food" class="menu-section">
+            <div class="section-header">
+                <h2 class="section-title">SO TASTY</h2>
+            </div>
+
+            <h3 class="category-header">Crepes / Gaufres</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Cheesy</span>
+                        <span class="item-price">13 DT</span>
+                    </div>
+                    <p class="item-desc">Harissa au choix / Mozza / Gruyère / Sauce Fromagère / Fromage Blanc / Salade</p>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Tuna</span>
+                        <span class="item-price">13 DT</span>
+                    </div>
+                    <p class="item-desc">Mozza / Sauce Fromagère / Thon / Salade</p>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Orientale</span>
+                        <span class="item-price">13 DT</span>
+                    </div>
+                    <p class="item-desc">Mozza / Sauce Fromagère / Champignon / Salade</p>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Bombay</span>
+                        <span class="item-price">15 DT</span>
+                    </div>
+                    <p class="item-desc">Mozza / Sauce Fromagère / Viande Hachée / Salade</p>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Tunisienne</span>
+                        <span class="item-price">15 DT</span>
+                    </div>
+                    <p class="item-desc">Mozza / Sauce Fromagère / Thon / Oeuf / Jambon / Salade</p>
+                </div>
+            </div>
+
+            <h3 class="category-header">Club Sandwich ou Croque Monsieur ou Panini</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Jambon</span>
+                        <span class="item-price">12 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Tuna</span>
+                        <span class="item-price">13 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Poulet Pané</span>
+                        <span class="item-price">13 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Tacos</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Poulet Pané</span>
+                        <span class="item-price">13 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Viande Hachée</span>
+                        <span class="item-price">15 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Specials</h3>
+            <div class="menu-grid">
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Croissant Salé Façon Chef</span>
+                        <span class="item-price">13 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Omlette au Choix</span>
+                        <span class="item-price">10 DT</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DESSERTS -->
+        <section id="desserts" class="menu-section">
+            <div class="section-header">
+                <h2 class="section-title">SO YUMMY</h2>
+            </div>
+
+            <h3 class="category-header">Crepes / Gaufres / Bubbles Waffles</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Nutella / Factory Chocolate</span>
+                        <span class="item-price">13 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Pistachio</span>
+                        <span class="item-price">14 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Black Rabbit</span>
+                        <span class="item-price">16 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Bianca</span>
+                        <span class="item-price">10 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Big Bubbeles (Boules)</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Nutella / Factory Chocolate</span>
+                        <span class="item-price">13 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Pistachio</span>
+                        <span class="item-price">16 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Black Rabbit</span>
+                        <span class="item-price">18 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Bianca</span>
+                        <span class="item-price">13 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Tagliatelle</h3>
+            <div class="menu-grid">
+                <div class="menu-card highlight-item">
+                    <div class="item-title">
+                        <span>Tagliatelle</span>
+                        <span class="item-price">18 DT</span>
+                    </div>
+                    <p class="item-desc">Nutella / Fruit de Saison / Fruit Sec / Mascarpone</p>
+                </div>
+            </div>
+
+            <h3 class="category-header">Composer Vos Poffertjes</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>10 Pièces</span>
+                        <span class="item-price">4 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>15 Pièces</span>
+                        <span class="item-price">5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>20 Pièces</span>
+                        <span class="item-price">7 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Tiramisu Ball</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>5 Pièces</span>
+                        <span class="item-price">9 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>10 Pièces</span>
+                        <span class="item-price">12 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Classic Desserts</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Fondant Nutella</span>
+                        <span class="item-price">12 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Tiramisu</span>
+                        <span class="item-price">12 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Cheesecake</span>
+                        <span class="item-price">13 DT</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="category-header">Extra (Make it Extra Special)</h3>
+            <div class="menu-grid">
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Fruit Sec / Oreo / Snickers / Lotus / Ferrero / Bueno</span>
+                        <span class="item-price">3 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Nutella / Factory Chocolate</span>
+                        <span class="item-price">5 DT</span>
+                    </div>
+                </div>
+                <div class="menu-card">
+                    <div class="item-title">
+                        <span>Pistachio</span>
+                        <span class="item-price">6 DT</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>📍 BLACK RABBIT COFFEE SHOP</p>
+        <p>☎️ CONTACTEZ-NOUS POUR PLUS D'INFORMATIONS +216 22 787 023</p>
+        <p>⏰ OUVERT TOUS LES JOURS</p>
+        <p style="margin-top: 2rem; color: #8b7bff;">© 2025 Black Rabbit Coffee Shop - Tous droits réservés</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.menu-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Add hover effects to menu cards
+        document.querySelectorAll('.menu-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
