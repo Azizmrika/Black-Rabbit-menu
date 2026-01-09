@@ -380,6 +380,145 @@
                 0 0 30px rgba(37, 211, 102, 0.3);
         }
 
+        /* BOUTON WIFI */
+        .wifi-btn {
+            background: linear-gradient(135deg, 
+                rgba(0, 150, 136, 0.85) 0%, 
+                rgba(0, 105, 92, 0.85) 100%);
+            color: white;
+            border-color: rgba(0, 150, 136, 0.5);
+        }
+
+        .wifi-btn:hover {
+            box-shadow: 
+                0 10px 25px rgba(0, 150, 136, 0.4),
+                0 0 30px rgba(0, 150, 136, 0.3);
+        }
+
+        /* MODAL WIFI */
+        .wifi-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            animation: fadeInScale 0.3s ease-out;
+        }
+
+        .wifi-modal.active {
+            display: flex;
+        }
+
+        .wifi-modal-content {
+            background: linear-gradient(135deg, 
+                rgba(26, 26, 26, 0.95) 0%, 
+                rgba(42, 42, 42, 0.98) 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 2px solid #8b7bff;
+            max-width: 90%;
+            width: 500px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 20px 50px rgba(139, 123, 255, 0.3);
+            position: relative;
+        }
+
+        .wifi-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #ffd700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .wifi-modal-close:hover {
+            background: rgba(255, 215, 0, 0.1);
+            transform: scale(1.1);
+        }
+
+        .wifi-qr-code {
+            margin: 1.5rem auto;
+            width: 200px;
+            height: 200px;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wifi-qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .wifi-info-box {
+            margin: 1.5rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .wifi-info-item {
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .wifi-info-icon {
+            color: #8b7bff;
+            font-size: 1.2rem;
+        }
+
+        .wifi-platform-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .wifi-platform-btn {
+            background: linear-gradient(135deg, #8b7bff, #6a5bff);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .wifi-platform-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(139, 123, 255, 0.4);
+        }
+
         /* NAVIGATION */
         .menu-nav {
             display: flex;
@@ -617,7 +756,7 @@
         }
 
         .item-desc {
-            color: #d9d9d9;
+            color: #ffd700;
             line-height: 1.6;
             margin-top: clamp(0.3rem, 1vw, 0.6rem);
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -625,7 +764,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             opacity: 0.9;
-            font-weight: 500;
+            font-weight: 900;
         }
 
         /* CATÉGORIES */
@@ -881,6 +1020,15 @@
             .item-price {
                 align-self: flex-end;
             }
+            
+            .wifi-modal-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+            
+            .wifi-platform-buttons {
+                flex-direction: column;
+            }
         }
 
         @media (max-width: 576px) {
@@ -1023,6 +1171,11 @@
                 padding: 0.4rem 0.8rem;
                 font-size: 0.7rem;
             }
+            
+            .wifi-modal-content {
+                max-height: 90vh;
+                overflow-y: auto;
+            }
         }
 
         /* SUPPORT TOUCH */
@@ -1034,13 +1187,15 @@
             .nav-btn:hover, 
             .social-btn:hover,
             .footer-social-link:hover,
-            .scroll-to-top:hover {
+            .scroll-to-top:hover,
+            .wifi-platform-btn:hover {
                 transform: none;
             }
             
             .menu-card:active,
             .nav-btn:active,
-            .social-btn:active {
+            .social-btn:active,
+            .wifi-platform-btn:active {
                 transform: scale(0.98);
             }
         }
@@ -1083,18 +1238,6 @@
                 opacity: 0;
             }
         }
-        .item-desc {
-            color: #ffd700;
-            line-height: 1.6;
-            margin-top: clamp(0.3rem, 1vw, 0.6rem);
-            font-family: 'Segoe UI', Arial, sans-serif;
-            font-size: clamp(0.85rem, 2vw, 1rem);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.9;
-            font-weight: 900;
-        }
-    
     </style>
 </head>
 <body>
@@ -1109,6 +1252,49 @@
     <div class="floating-text" style="top: 35%; left: -50%; animation-delay: 7s; animation-duration: 40s;">COFFEE SHOP</div>
     <div class="floating-text" style="top: 55%; left: -50%; animation-delay: 14s; animation-duration: 45s;">KELIBIA</div>
     <div class="floating-text" style="top: 75%; left: -50%; animation-delay: 21s; animation-duration: 50s;">SINCE 2025</div>
+
+    <!-- MODAL WIFI -->
+    <div class="wifi-modal" id="wifiModal">
+        <div class="wifi-modal-content">
+            <button class="wifi-modal-close" onclick="closeWifiModal()">×</button>
+            
+            <h2 style="color: #ffd700; margin-bottom: 1.5rem; font-size: 1.8rem;">Connexion Wi-Fi Black Rabbit</h2>
+            
+            <div class="wifi-qr-code" id="wifiQrCode">
+                <!-- QR Code sera généré ici -->
+            </div>
+            
+            <div class="wifi-info-box">
+                <div class="wifi-info-item">
+                    <span class="wifi-info-icon">📶</span>
+                    <span><strong>Réseau:</strong> Black-rabbit5G</span>
+                </div>
+                <div class="wifi-info-item">
+                    <span class="wifi-info-icon">🔑</span>
+                    <span><strong>Mot de passe:</strong> BLACKRABBIT1</span>
+                </div>
+                
+                
+            </div>
+            
+            <div style="text-align: left; margin: 1.5rem 0;">
+                <h3 style="color: #8b7bff; margin-bottom: 0.5rem;">Instructions :</h3>
+                <ol style="margin-left: 1.5rem; line-height: 1.6; font-size: 0.9rem;">
+                    <li><strong>Méthode 1 (Recommandée):</strong> Scannez le QR Code avec votre appareil photo</li>
+                    <li><strong>Méthode 2:</strong> Ouvrez Paramètres → Wi-Fi → Sélectionnez "Black-rabbit5G"</li>
+                    <li>Entrez le mot de passe: <strong>BLACKRABBIT1</strong></li>
+                    <li>Appuyez sur "Connexion"</li>
+                </ol>
+            </div>
+            
+            <div class="wifi-platform-buttons">
+                
+                <button class="wifi-platform-btn" onclick="copyWifiPassword()">
+                    📋 Copier le mot de passe
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- HEADER -->
     <header class="header">
@@ -1146,6 +1332,12 @@
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
                 </svg>
                 WhatsApp
+            </a>
+            <a href="#" onclick="showWifiModal(event)" class="social-btn wifi-btn">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 21c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-7c.55 0 1 .45 1 1v4c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1 .45 1 1v3h10v-3c0-.55.45-1 1-1zm-5.71-8.71c.39.39.39 1.02 0 1.41L12 9.41l1.71 1.71c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 8l1.71-1.71c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L12 6.59l-1.71-1.71c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 8l-1.71 1.71c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 9.41l1.71 1.71c.39.39 1.02.39 1.41 0z"/>
+                </svg>
+                Connexion Wi-Fi
             </a>
         </div>
     </header>
@@ -1905,6 +2097,14 @@
     </footer>
 
     <script>
+        // Configuration Wi-Fi
+        const WIFI_CONFIG = {
+            ssid: "Black-rabbit5G",
+            password: "BLACKRABBIT1",
+            security: "WPA",
+            hidden: false
+        };
+
         // Fonction pour changer de section
         function showSection(sectionId) {
             // Masquer toutes les sections
@@ -1978,21 +2178,6 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-        
-        // Gestionnaire d'événements pour les cartes sur mobile
-        function setupTouchEvents() {
-            const menuCards = document.querySelectorAll('.menu-card');
-            
-            menuCards.forEach(card => {
-                card.addEventListener('touchstart', function() {
-                    this.style.transform = 'translateY(-5px) scale(1.01)';
-                });
-                
-                card.addEventListener('touchend', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-        }
 
         // Gestionnaire de redimensionnement
         let resizeTimer;
@@ -2017,15 +2202,141 @@
             }
         }
 
+        // ==================== FONCTIONNALITÉS WIFI ====================
+
+        // Afficher le modal Wi-Fi
+        function showWifiModal(e) {
+            e.preventDefault();
+            const modal = document.getElementById('wifiModal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Générer le QR Code
+            generateWifiQRCode();
+        }
+
+        // Fermer le modal Wi-Fi
+        function closeWifiModal() {
+            const modal = document.getElementById('wifiModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Générer le QR Code Wi-Fi
+        function generateWifiQRCode() {
+            const qrContainer = document.getElementById('wifiQrCode');
+            const wifiString = `WIFI:S:${WIFI_CONFIG.ssid};T:${WIFI_CONFIG.security};P:${WIFI_CONFIG.password};;`;
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(wifiString)}&color=8b7bff&bgcolor=ffffff`;
+            
+            qrContainer.innerHTML = `<img src="${qrUrl}" alt="QR Code Wi-Fi" style="width: 100%; height: 100%;">`;
+        }
+
+        // Connexion Wi-Fi selon la plateforme
+        function connectToWifi(platform) {
+            const wifiString = `WIFI:S:${WIFI_CONFIG.ssid};T:${WIFI_CONFIG.security};P:${WIFI_CONFIG.password};;`;
+            
+            switch(platform) {
+                case 'android':
+                    // Pour Android: essayer d'ouvrir l'URL de connexion Wi-Fi
+                    try {
+                        window.location.href = `intent://wifi/${WIFI_CONFIG.ssid}/${WIFI_CONFIG.password}#Intent;scheme=android-wifi;end;`;
+                    } catch (e) {
+                        // Fallback: Afficher les informations
+                        alert(`Pour Android:\n\n1. Ouvrez Paramètres → Wi-Fi\n2. Sélectionnez "${WIFI_CONFIG.ssid}"\n3. Entrez le mot de passe: ${WIFI_CONFIG.password}`);
+                    }
+                    break;
+                    
+                case 'ios':
+                    // Pour iOS: Télécharger un profil de configuration
+                    downloadIOSWifiProfile();
+                    break;
+                    
+                default:
+                    // Fallback général
+                    alert(`Wi-Fi: ${WIFI_CONFIG.ssid}\nMot de passe: ${WIFI_CONFIG.password}\n\nScannez le QR Code ou copiez manuellement les informations.`);
+            }
+        }
+
+        // Télécharger le profil Wi-Fi pour iOS
+        function downloadIOSWifiProfile() {
+            const profile = `<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadDisplayName</key>
+    <string>Black Rabbit Wi-Fi</string>
+    <key>PayloadIdentifier</key>
+    <string>com.blackrabbit.wifi</string>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>${generateUUID()}</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+            <key>EncryptionType</key>
+            <string>WPA</string>
+            <key>HIDDEN_NETWORK</key>
+            <false/>
+            <key>PayloadDisplayName</key>
+            <string>Wi-Fi (${WIFI_CONFIG.ssid})</string>
+            <key>PayloadIdentifier</key>
+            <string>com.blackrabbit.wifi.network</string>
+            <key>PayloadType</key>
+            <string>com.apple.wifi.managed</string>
+            <key>PayloadUUID</key>
+            <string>${generateUUID()}</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>SSID_STR</key>
+            <string>${WIFI_CONFIG.ssid}</string>
+            <key>Password</key>
+            <string>${WIFI_CONFIG.password}</string>
+        </dict>
+    </array>
+</dict>
+</plist>`;
+            
+            const blob = new Blob([profile], { type: 'application/x-apple-aspen-config' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'black-rabbit-wifi.mobileconfig';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            alert("Profil Wi-Fi téléchargé. Ouvrez-le pour installer la configuration Wi-Fi.");
+        }
+
+        // Copier le mot de passe Wi-Fi
+        function copyWifiPassword() {
+            navigator.clipboard.writeText(WIFI_CONFIG.password)
+                .then(() => {
+                    alert('Mot de passe copié dans le presse-papier!');
+                })
+                .catch(err => {
+                    console.error('Erreur lors de la copie:', err);
+                    alert('Le mot de passe est: ' + WIFI_CONFIG.password);
+                });
+        }
+
+        // Générer un UUID
+        function generateUUID() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        // ==================== INITIALISATION ====================
+
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
             // Créer les particules
             createParticles();
-            
-            // Configurer les événements tactiles
-            if ('ontouchstart' in window) {
-                setupTouchEvents();
-            }
             
             // Vérifier le hash de l'URL
             checkHash();
@@ -2039,18 +2350,20 @@
             // Initialiser l'état du bouton
             toggleScrollTopButton();
             
-            // Ajouter des événements pour les cartes sur desktop
-            if (!('ontouchstart' in window)) {
-                document.querySelectorAll('.menu-card').forEach(card => {
-                    card.addEventListener('mouseenter', function() {
-                        this.style.transform = 'translateY(-8px) scale(1.02)';
-                    });
-                    
-                    card.addEventListener('mouseleave', function() {
-                        this.style.transform = 'translateY(0) scale(1)';
-                    });
-                });
-            }
+            // Fermer le modal Wi-Fi en cliquant à l'extérieur
+            const wifiModal = document.getElementById('wifiModal');
+            wifiModal.addEventListener('click', function(e) {
+                if (e.target === wifiModal) {
+                    closeWifiModal();
+                }
+            });
+            
+            // Fermer le modal Wi-Fi avec la touche Échap
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeWifiModal();
+                }
+            });
         });
 
         // Gestionnaire d'erreurs pour les images
