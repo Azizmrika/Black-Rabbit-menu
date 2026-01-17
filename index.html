@@ -767,6 +767,27 @@
             font-weight: 900;
         }
 
+        /* STYLES DES IMAGES */
+.item-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    object-position: center center; /* Centrer l'image dans le cadre */
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    border: 2px solid rgba(139, 123, 255, 0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease;
+    display: block; /* S'assurer que l'image se comporte comme un bloc */
+    background-color: #f5f5f5; /* Fond de secours si l'image ne charge pas */
+}
+
+        .menu-card:hover .item-image {
+            border-color: #ffd700;
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(139, 123, 255, 0.4);
+        }
+
         /* CATÉGORIES */
         .category-header {
             background: linear-gradient(90deg, 
@@ -812,7 +833,7 @@
 
         /* ITEMS MIS EN AVANT */
         .highlight-item {
-            border: 3px solid #ff4000;
+            border: 3px solid #ffd700;
             box-shadow: 
                 0 0 35px rgba(255, 215, 0, 0.4),
                 inset 0 0 15px rgba(255, 215, 0, 0.1);
@@ -824,7 +845,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background: linear-gradient(45deg, #ff0000, #ff8800);
+            background: linear-gradient(45deg, #ffd700, #ff8800);
             color: white;
             padding: 4px 12px;
             border-radius: 20px;
@@ -832,7 +853,7 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 3px 10px rgba(255, 0, 0, 0.3);
+            box-shadow: 0 3px 10px rgba(255, 215, 0, 0.3);
         }
 
         /* BOUTON SCROLL TO TOP */
@@ -978,6 +999,10 @@
             .section-header {
                 padding: 2.5rem 1.5rem;
             }
+            
+            .item-image {
+                height: 200px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1019,6 +1044,10 @@
             
             .item-price {
                 align-self: flex-end;
+            }
+            
+            .item-image {
+                height: 180px;
             }
             
             .wifi-modal-content {
@@ -1083,6 +1112,10 @@
                 padding: 1.5rem;
             }
             
+            .item-image {
+                height: 160px;
+            }
+            
             .section-header {
                 padding: 2rem 1rem;
                 border-radius: 20px;
@@ -1123,6 +1156,10 @@
             
             .item-price {
                 font-size: 1.1rem;
+            }
+            
+            .item-image {
+                height: 140px;
             }
             
             .size-badge {
@@ -1172,6 +1209,10 @@
                 font-size: 0.7rem;
             }
             
+            .item-image {
+                height: 120px;
+            }
+            
             .wifi-modal-content {
                 max-height: 90vh;
                 overflow-y: auto;
@@ -1214,6 +1255,11 @@
             .item-title {
                 color: #ffd700;
             }
+            
+            .item-image {
+                border-width: 3px;
+                border-color: white;
+            }
         }
 
         /* RÉDUCTION DES ANIMATIONS SI DEMANDÉ */
@@ -1237,7 +1283,40 @@
                 animation: none;
                 opacity: 0;
             }
+            
+            .menu-card:hover {
+                transform: none;
+            }
+            
+            .item-image:hover {
+                transform: none;
+            }
         }
+        .address-link {
+    color: #2c3e50;
+    text-decoration: none;
+    position: relative;
+}
+
+.address-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #3498db;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.address-link:hover::after {
+    transform: scaleX(1);
+}
+
+.address-link:hover {
+    color: #e74c3c;
+}
     </style>
 </head>
 <body>
@@ -1273,8 +1352,6 @@
                     <span class="wifi-info-icon">🔑</span>
                     <span><strong>Mot de passe:</strong> BLACKRABBIT1</span>
                 </div>
-                
-                
             </div>
             
             <div style="text-align: left; margin: 1.5rem 0;">
@@ -1288,7 +1365,6 @@
             </div>
             
             <div class="wifi-platform-buttons">
-                
                 <button class="wifi-platform-btn" onclick="copyWifiPassword()">
                     📋 Copier le mot de passe
                 </button>
@@ -1335,7 +1411,7 @@
             </a>
             <a href="#" onclick="showWifiModal(event)" class="social-btn wifi-btn">
                 <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 21c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-7c.55 0 1 .45 1 1v4c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1 .45 1 1v3h10v-3c0-.55.45-1 1-1zm-5.71-8.71c.39.39.39 1.02 0 1.41L12 9.41l1.71 1.71c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 8l1.71-1.71c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L12 6.59l-1.71-1.71c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 8l-1.71 1.71c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 9.41l1.71 1.71c.39.39 1.02.39 1.41 0z"/>
+                    <path d="M12 21c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm6-7c.55 0 1 .45 1 1v4c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1 .45 1 1v3h10v-3c0-.55.45-1 1-1zm-5.71-8.71c.39.39.39 1.02 0 1.41L12 9.41l1.71 1.71c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L13.41 8l1.71-1.71c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0L12 6.59l-1.71-1.71c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41L10.59 8l-1.71 1.71c-.39-.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0L12 9.41l1.71 1.71c.39.39 1.02.39 1.41 0z"/>
                 </svg>
                 Connexion Wi-Fi
             </a>
@@ -1371,6 +1447,7 @@
 
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Petit dejeuner express.jpeg" alt="Petit dejeuner express" class="item-image">
                     <div class="item-title">
                         <span>Petit déjeuner express</span>
                         <span class="item-price">9 DT</span>
@@ -1379,6 +1456,7 @@
                 </div>
 
                 <div class="menu-card">
+                    <img src="hong kong waffle.jpeg" alt="Waffle Addict" class="item-image" style="width: 100%;">
                     <div class="item-title">
                         <span>Waffle Addict</span>
                         <span class="item-price">15 DT</span>
@@ -1387,6 +1465,7 @@
                 </div>
 
                 <div class="menu-card">
+                    <img src="Pain Perdu aux fruits.jpeg" alt="Fresh toast addict" class="item-image">
                     <div class="item-title">
                         <span>Fresh toast addict</span>
                         <span class="item-price">15 DT</span>
@@ -1395,6 +1474,7 @@
                 </div>
 
                 <div class="menu-card highlight-item">
+                    <img src="Wake Up petit dejeuner.jpeg" alt="Wake Up petit dejeuner" class="item-image">
                     <div class="item-title">
                         <span>Tasty dreaming</span>
                         <span class="item-price">19 DT</span>
@@ -1403,6 +1483,7 @@
                 </div>
 
                 <div class="menu-card highlight-item">
+                    <img src="Wake up.jpeg" alt="Wake up" class="item-image">
                     <div class="item-title">
                         <span>Wake up</span>
                         <span class="item-price">19 DT</span>
@@ -1411,6 +1492,7 @@
                 </div>
 
                 <div class="menu-card highlight-item">
+                    <img src="Club sand.jpeg" alt="Club sand" class="item-image">
                     <div class="item-title">
                         <span>Club Sando</span>
                         <span class="item-price">22 DT</span>
@@ -1419,6 +1501,7 @@
                 </div>
 
                 <div class="menu-card">
+                    <img src="Croissant salé.jpeg" alt="Croissant salét" class="item-image">
                     <div class="item-title">
                         <span>Croissant Addict</span>
                         <span class="item-price">15 DT</span>
@@ -1427,6 +1510,7 @@
                 </div>
 
                 <div class="menu-card highlight-item">
+                    <img src="Brunch.jpeg" alt="Brunch" class="item-image">
                     <div class="item-title">
                         <span>Black Rabbit Brunch (for two)</span>
                         <span class="item-price">37 DT</span>
@@ -1445,30 +1529,35 @@
             <h3 class="category-header">Classic Hot Drinks</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Espresso.jpeg" alt="Espresso" class="item-image">
                     <div class="item-title">
                         <span>Espresso</span>
                         <span class="item-price">3,5 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Espresso.jpeg" alt="Espresso" class="item-image">
                     <div class="item-title">
                         <span>Double Espresso</span>
                         <span class="item-price">4,5 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Esspresso macchiato.jpeg" alt="Esspresso macchiato" class="item-image">
                     <div class="item-title">
                         <span>Espresso Macchiato</span>
                         <span class="item-price">4 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Ice_américano-removebg-preview.png" alt="Ice_américano-removebg-preview" class="item-image"style="width: 80%;">
                     <div class="item-title">
                         <span>Americano</span>
                         <span class="item-price">4 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Cappuccino.jpeg" alt="Cappuccino" class="item-image">
                     <div class="item-title">
                         <span>Cappuccino</span>
                     </div>
@@ -1478,12 +1567,15 @@
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Latte_vanille-removebg-preview.png" alt="Latte_vanille-removebg-preview" class="item-image">
                     <div class="item-title">
                         <span>Vanilla Latte</span>
                         <span class="item-price">7 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                   <!-- Version corrigée -->
+<img src="Latte.jpeg" alt="Latte" class="item-image" style="width: 80%;">
                     <div class="item-title">
                         <span>Latte Macchiato</span>
                     </div>
@@ -1493,6 +1585,7 @@
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Hot choco.jpeg" alt="Hot choco" class="item-image">
                     <div class="item-title">
                         <span>Hot Chocolate</span>
                     </div>
@@ -1502,12 +1595,14 @@
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Tea.jpeg" alt="Tea" class="item-image">
                     <div class="item-title">
                         <span>Tea</span>
                         <span class="item-price">4 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Nespresso (2).jpeg" alt="Nespresso (2)" class="item-image">
                     <div class="item-title">
                         <span>Nespresso</span>
                         <span class="item-price">6 DT</span>
@@ -1518,8 +1613,9 @@
             <h3 class="category-header">Classic Macchiato</h3>
             <div class="menu-grid">
                 <div class="menu-card highlight-item">
+                    <img src="Macchiato Pistachio.jpeg" alt="Classic Macchiato" class="item-image">
                     <div class="item-title">
-                        
+                        <span>Classic Macchiato</span>
                     </div>
                     <p class="item-desc">Chocolate / Moka / Hazelnut / Caramel</p>
                     <div class="size-options">
@@ -1532,8 +1628,9 @@
             <h3 class="category-header">Special Macchiato</h3>
             <div class="menu-grid">
                 <div class="menu-card highlight-item">
+                    <img src="Macchiato Pistachio, Macchiato Nutella.jpeg" alt="Special Macchiato" class="item-image">
                     <div class="item-title">
-                        
+                        <span>Special Macchiato</span>
                     </div>
                     <p class="item-desc">Nutella / Speculos / Pistachio / Vanilla</p>
                     <div class="size-options">
@@ -1546,6 +1643,7 @@
             <h3 class="category-header">Black Rabbit Hot</h3>
             <div class="menu-grid">
                 <div class="menu-card highlight-item">
+                    <img src="Special Matcha.jpeg" alt="Matcha" class="item-image">
                     <div class="item-title">
                         <span>Matcha</span>
                     </div>
@@ -1555,6 +1653,7 @@
                     </div>
                 </div>
                 <div class="menu-card highlight-item">
+                    <img src="V60.jpeg" alt="V60" class="item-image"style="width: 80%;">
                     <div class="item-title">
                         <span>V 60 Coffee</span>
                         <span class="item-price">14,5 DT</span>
@@ -1572,6 +1671,7 @@
             <h3 class="category-header">Frappuccino</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Frappuccino.jpeg" alt="Chocolate Moka Hazelnut Frappuccino" class="item-image">
                     <div class="item-title">
                         <span>Chocolate / Moka / Hazelnut</span>
                     </div>
@@ -1581,6 +1681,7 @@
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Frappuccino Caramel.jpeg" alt="Frappuccino Caramel" class="item-image">
                     <div class="item-title">
                         <span>Strawberry / Caramel</span>
                     </div>
@@ -1590,6 +1691,7 @@
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Frappuccino Spéculos.jpeg" alt="Speculos Nutella Snikers Frappuccino" class="item-image">
                     <div class="item-title">
                         <span>Speculos / Nutella / Snikers</span>
                     </div>
@@ -1603,6 +1705,7 @@
             <h3 class="category-header">Classic Ice Coffee</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Ice_américano-removebg-preview.png" alt="Ice_américano-removebg-preview" class="item-image">
                     <div class="item-title">
                         <span>Ice Americano</span>
                     </div>
@@ -1612,6 +1715,7 @@
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Ice_latte-removebg-preview.png" alt="Ice_latte-removebg-preview" class="item-image">
                     <div class="item-title">
                         <span>Ice Latte</span>
                     </div>
@@ -1625,6 +1729,7 @@
             <h3 class="category-header">Ice Macchiato</h3>
             <div class="menu-grid">
                 <div class="menu-card highlight-item">
+                    <img src="Ice.jpeg" alt="Ice" class="item-image">
                     <div class="item-title">
                         <span>Chocolate / Moka / Hazelnut / Caramel</span>
                     </div>
@@ -1638,6 +1743,7 @@
             <h3 class="category-header">Ice</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Ice chocolate.jpeg" alt="Ice chocolate" class="item-image">
                     <div class="item-title">
                         <span>Chocolate / Cookies / Vanilla</span>
                     </div>
@@ -1647,6 +1753,7 @@
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Ice spéculos.jpeg" alt="Ice spéculos" class="item-image">
                     <div class="item-title">
                         <span>Noisette / Speculos</span>
                     </div>
@@ -1656,6 +1763,7 @@
                     </div>
                 </div>
                 <div class="menu-card highlight-item">
+                    <img src="Special Matcha.jpeg" alt="Matcha Ice" class="item-image">
                     <div class="item-title">
                         <span>Matcha</span>
                     </div>
@@ -1669,6 +1777,7 @@
             <h3 class="category-header">Energetic Mojitos</h3>
             <div class="menu-grid">
                 <div class="menu-card highlight-item">
+                    <img src="Mojito (2).jpeg" alt="Mojito (2)" class="item-image">
                     <div class="item-title">
                         <span>Red / Blue / Classic / Pinacolada</span>
                     </div>
@@ -1682,10 +1791,10 @@
             <h3 class="category-header">Classic Mojito</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Classic mojito.jpeg" alt="Classic mojito" class="item-image">
                     <div class="item-title">
                         <span>Red / Blue / Classic / Pinacolada / Blue Berry / Mangue / Banane / Black Currant / Passion Fruit</span>
                     </div>
-                    
                     <div class="size-options">
                         <span class="size-badge">10 DT</span>
                         <span class="size-badge">11,5 DT</span>
@@ -1696,6 +1805,7 @@
             <h3 class="category-header">Juices</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="juice.jpeg" alt="juice" class="item-image">
                     <div class="item-title">
                         <span>Orange</span>
                     </div>
@@ -1705,6 +1815,7 @@
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="citronade.jpeg" alt="citronade" class="item-image">
                     <div class="item-title">
                         <span>Citronade</span>
                     </div>
@@ -1714,6 +1825,7 @@
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="banane.jpeg" alt="banane" class="item-image">
                     <div class="item-title">
                         <span>Fraise / Kiwi / Banane / Ice B / Green B</span>
                     </div>
@@ -1727,18 +1839,21 @@
             <h3 class="category-header">Milkshake</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Milkshake Oreo.jpeg" alt="Oreo Nutella Speculos Milkshake" class="item-image">
                     <div class="item-title">
                         <span>Oreo / Nutella / Speculos</span>
                         <span class="item-price">10 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Milkshake pistache.jpeg" alt="Milkshake pistache" class="item-image">
                     <div class="item-title">
                         <span>Pistachio</span>
                         <span class="item-price">12 DT</span>
                     </div>
                 </div>
                 <div class="menu-card highlight-item">
+                    <img src="Milkshake Black Rabbit.jpeg" alt="Milkshake Black Rabbit" class="item-image">
                     <div class="item-title">
                         <span>Black Rabbit</span>
                         <span class="item-price">14 DT</span>
@@ -1749,8 +1864,9 @@
             <h3 class="category-header">Smoothies</h3>
             <div class="menu-grid">
                 <div class="menu-card highlight-item">
+                    <img src="Smoothie.jpeg" alt="Smoothies" class="item-image">
                     <div class="item-title">
-                        
+                        <span>Smoothies</span>
                         <span class="item-price">14 DT</span>
                     </div>
                     <p class="item-desc">Fraise / Cassis / Pinacolada / Blue Berry / Mangue / Banane / Black Currant / Passion Fruit</p>
@@ -1760,18 +1876,21 @@
             <h3 class="category-header">Soft Drinks</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="eau.jpeg" alt="eau" class="item-image">
                     <div class="item-title">
                         <span>Eau Plate</span>
                         <span class="item-price">3,5 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="eau.jpeg" alt="eau" class="item-image">
                     <div class="item-title">
                         <span>1/2 Eau</span>
                         <span class="item-price">2 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Soda.jpeg" alt="Soda" class="item-image">
                     <div class="item-title">
                         <span>Soda</span>
                         <span class="item-price">4,5 DT</span>
@@ -1782,6 +1901,7 @@
             <h3 class="category-header">Extra</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Extra Sirop.jpeg" alt="Extra Sirop" class="item-image">
                     <div class="item-title">
                         <span>Sirop</span>
                         <span class="item-price">3 DT</span>
@@ -1789,6 +1909,7 @@
                     <p class="item-desc">Caramel / Hazelnut / Chocolat / Strawberry</p>
                 </div>
                 <div class="menu-card">
+                    <img src="Extra Lait.jpeg" alt="Extra Lait" class="item-image">
                     <div class="item-title">
                         <span>Non Dairy Milk</span>
                         <span class="item-price">3 DT</span>
@@ -1796,6 +1917,7 @@
                     <p class="item-desc">Lait d'Amande / Avoine</p>
                 </div>
                 <div class="menu-card">
+                    <img src="Extra Creme Chantilly.jpeg" alt="Extra Creme Chantilly" class="item-image">
                     <div class="item-title">
                         <span>Crème Chantilly</span>
                         <span class="item-price">3 DT</span>
@@ -1813,6 +1935,7 @@
             <h3 class="category-header">Crepes / Gaufres</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Crepe Tuna.jpeg" alt="Crepe Tuna" class="item-image">
                     <div class="item-title">
                         <span>Cheesy</span>
                         <span class="item-price">13 DT</span>
@@ -1820,6 +1943,7 @@
                     <p class="item-desc">Harissa au choix / Mozza / Gruyère / Sauce Fromagère / Fromage Blanc / Salade</p>
                 </div>
                 <div class="menu-card">
+                    <img src="Crepe Tuna.jpeg" alt="Tuna Crepe" class="item-image">
                     <div class="item-title">
                         <span>Tuna</span>
                         <span class="item-price">13 DT</span>
@@ -1827,6 +1951,7 @@
                     <p class="item-desc">Mozza / Sauce Fromagère / Thon / Salade</p>
                 </div>
                 <div class="menu-card">
+                    <img src="Crêpe orientale.jpeg" alt="Crêpe orientale" class="item-image">
                     <div class="item-title">
                         <span>Orientale</span>
                         <span class="item-price">13 DT</span>
@@ -1834,6 +1959,7 @@
                     <p class="item-desc">Mozza / Sauce Fromagère / Champignon / Salade</p>
                 </div>
                 <div class="menu-card">
+                    <img src="Crepe bombay.jpeg" alt="Crepe bombay" class="item-image">
                     <div class="item-title">
                         <span>Bombay</span>
                         <span class="item-price">15 DT</span>
@@ -1841,6 +1967,7 @@
                     <p class="item-desc">Mozza / Sauce Fromagère / Viande Hachée / Salade</p>
                 </div>
                 <div class="menu-card">
+                    <img src="Crepe Tunisienne.jpeg" alt="Tunisienne Crepe" class="item-image">
                     <div class="item-title">
                         <span>Tunisienne</span>
                         <span class="item-price">15 DT</span>
@@ -1852,18 +1979,21 @@
             <h3 class="category-header">Club Sandwich ou Croque Monsieur ou Panini</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Croque Monsieur jambon.jpeg" alt="Croque Monsieur jambon" class="item-image">
                     <div class="item-title">
                         <span>Jambon</span>
                         <span class="item-price">12 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Panini.jpeg" alt="Panini" class="item-image">
                     <div class="item-title">
                         <span>Tuna</span>
                         <span class="item-price">13 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Panini.jpeg" alt="Panini" class="item-image">
                     <div class="item-title">
                         <span>Poulet Pané</span>
                         <span class="item-price">13 DT</span>
@@ -1874,12 +2004,14 @@
             <h3 class="category-header">Tacos</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Tacos Poulet Pannée.jpeg" alt="Poulet Pané Tacos" class="item-image">
                     <div class="item-title">
                         <span>Poulet Pané</span>
                         <span class="item-price">13 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Tacos Poulet Pannée.jpeg" alt="Poulet Pané Tacos" class="item-image">
                     <div class="item-title">
                         <span>Viande Hachée</span>
                         <span class="item-price">15 DT</span>
@@ -1890,12 +2022,14 @@
             <h3 class="category-header">Specials</h3>
             <div class="menu-grid">
                 <div class="menu-card highlight-item">
+                    <img src="Croissant salé.jpeg" alt="Croissant salé" class="item-image">
                     <div class="item-title">
                         <span>Croissant Salé Façon Chef</span>
                         <span class="item-price">13 DT</span>
                     </div>
                 </div>
                 <div class="menu-card highlight-item">
+                    <img src="Omelette.jpeg" alt="Omelette" class="item-image">
                     <div class="item-title">
                         <span>Omlette au Choix</span>
                         <span class="item-price">10 DT</span>
@@ -1913,24 +2047,28 @@
             <h3 class="category-header">Crepes / Gaufres / Bubbles Waffles</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Nutella.jpeg" alt="Nutella" class="item-image" style="width: 100%;">
                     <div class="item-title">
                         <span>Nutella / Factory Chocolate</span>
                         <span class="item-price">13 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Crepe Pistachio.jpeg" alt="Crepe Pistachio" class="item-image">
                     <div class="item-title">
                         <span>Pistachio</span>
                         <span class="item-price">14 DT</span>
                     </div>
                 </div>
                 <div class="menu-card highlight-item">
+                    <img src="Crepe BR.jpeg" alt="Crepe BR" class="item-image">
                     <div class="item-title">
                         <span>Black Rabbit</span>
                         <span class="item-price">16 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Crepe Bianca.jpeg" alt="Bianca" class="item-image" style="width: 80%;">
                     <div class="item-title">
                         <span>Bianca</span>
                         <span class="item-price">10 DT</span>
@@ -1941,24 +2079,28 @@
             <h3 class="category-header">Big Bubbeles (Boules)</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Big bubbles Nutella (2).jpeg" alt="Big bubbles Nutella (2)" class="item-image">
                     <div class="item-title">
                         <span>Nutella / Factory Chocolate</span>
                         <span class="item-price">13 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Big Bubbles Pistachio.jpeg" alt="Pistachio Bubbles" class="item-image">
                     <div class="item-title">
                         <span>Pistachio</span>
                         <span class="item-price">16 DT</span>
                     </div>
                 </div>
                 <div class="menu-card highlight-item">
+                    <img src="Bubbles black rabbit.jpeg" alt="Bubbles black rabbit" class="item-image">
                     <div class="item-title">
                         <span>Black Rabbit</span>
                         <span class="item-price">18 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Big bubbles Bianca.jpeg" alt="Big bubbles Bianca" class="item-image">
                     <div class="item-title">
                         <span>Bianca</span>
                         <span class="item-price">13 DT</span>
@@ -1969,6 +2111,7 @@
             <h3 class="category-header">Tagliatelle</h3>
             <div class="menu-grid">
                 <div class="menu-card highlight-item">
+                    <img src="Crepe tagliatelli.jpeg" alt="Crepe tagliatelli" class="item-image">
                     <div class="item-title">
                         <span>Tagliatelle</span>
                         <span class="item-price">18 DT</span>
@@ -1977,24 +2120,27 @@
                 </div>
             </div>
 
-            <h3 class="category-header">Composer Vos Poffertjes</h3>
+            <h3 class="category-header">BOX</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="DUTCH.jpeg" alt="DUTCH" class="item-image">
                     <div class="item-title">
-                        <span>10 Pièces</span>
-                        <span class="item-price">4 DT</span>
+                        <span>DUTCH PANCAKE</span>
+                        <span class="item-price">15 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Box brownies.jpeg" alt="Box brownies" class="item-image">
                     <div class="item-title">
-                        <span>15 Pièces</span>
-                        <span class="item-price">5 DT</span>
+                        <span>BROWNIES</span>
+                        <span class="item-price">15 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Black rabbit Box.jpeg" alt="Black rabbit Box" class="item-image">
                     <div class="item-title">
-                        <span>20 Pièces</span>
-                        <span class="item-price">7 DT</span>
+                        <span>BLACK RABBIT</span>
+                        <span class="item-price">17 DT</span>
                     </div>
                 </div>
             </div>
@@ -2002,12 +2148,14 @@
             <h3 class="category-header">Tiramisu Ball</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Tiramisu Ball.jpeg" alt="4 Pièces Tiramisu Ball" class="item-image">
                     <div class="item-title">
                         <span>4 Pièces</span>
                         <span class="item-price">9 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="7 Pieces tiramisu.jpeg" alt="7 Pieces tiramisu" class="item-image">
                     <div class="item-title">
                         <span>6 Pièces</span>
                         <span class="item-price">13 DT</span>
@@ -2018,18 +2166,21 @@
             <h3 class="category-header">Classic Desserts</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Fondant chocolat.jpeg" alt="Fondant chocolat" class="item-image">
                     <div class="item-title">
                         <span>Fondant Nutella</span>
                         <span class="item-price">12 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Tiramisu.jpeg" alt="Tiramisu" class="item-image">
                     <div class="item-title">
                         <span>Tiramisu</span>
                         <span class="item-price">12 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Cheescake.jpeg" alt="Cheescake" class="item-image">
                     <div class="item-title">
                         <span>Cheesecake</span>
                         <span class="item-price">13 DT</span>
@@ -2040,18 +2191,21 @@
             <h3 class="category-header">Extra (Make it Extra Special)</h3>
             <div class="menu-grid">
                 <div class="menu-card">
+                    <img src="Extra Oreo.jpeg" alt="Fruit Sec Oreo Snickers Lotus Ferrero Bueno" class="item-image">
                     <div class="item-title">
                         <span>Fruit Sec / Oreo / Snickers / Lotus / Ferrero / Bueno</span>
                         <span class="item-price">3 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Extra Factory.jpeg" alt="Extra Factory" class="item-image">
                     <div class="item-title">
                         <span>Nutella / Factory Chocolate</span>
                         <span class="item-price">5 DT</span>
                     </div>
                 </div>
                 <div class="menu-card">
+                    <img src="Extra pistachio.jpeg" alt="Extra pistachio" class="item-image">
                     <div class="item-title">
                         <span>Pistachio</span>
                         <span class="item-price">6 DT</span>
@@ -2071,7 +2225,296 @@
     <!-- FOOTER -->
     <footer>
         <p class="footer-title">🐰 BLACK RABBIT COFFEE SHOP</p>
-        <p>📍 Kelibia, Tunisie</p>
+        
+    <!-- Icône location animée -->
+    <span style="
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: -25px;
+        font-size: 1.5rem;
+        animation: locationPulse 2s infinite;
+        z-index: 2;
+        filter: drop-shadow(0 0 8px rgba(139, 123, 255, 0.5));
+    "></span>
+    
+    <a href="https://maps.google.com/maps?q=Black+Rabbit+Kélibia" 
+       target="_blank"
+       rel="noopener noreferrer"
+       id="address-link"
+       style="
+           position: relative;
+           color: white;
+           text-decoration: none;
+           font-weight: 700;
+           padding: 12px 30px;
+           border-radius: 25px;
+           border: 2px solid rgba(255, 255, 255, 0.15);
+           background: linear-gradient(
+               135deg,
+               rgba(20, 20, 20, 0.7),
+               rgba(40, 40, 40, 0.7)
+           );
+           display: inline-block;
+           transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+           box-shadow: 
+               0 8px 30px rgba(0, 0, 0, 0.4),
+               0 0 0 1px rgba(139, 123, 255, 0.2);
+           backdrop-filter: blur(15px);
+           -webkit-backdrop-filter: blur(15px);
+           overflow: hidden;
+           z-index: 1;
+           margin-top: 15px;
+       ">
+        
+        <!-- Effet de particules RGB -->
+        <div style="
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 100, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 123, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 200, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        "></div>
+        
+        <!-- Effet de brillance -->
+        <div style="
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            animation: shineAddress 4s infinite;
+            z-index: -1;
+        "></div>
+        
+        <!-- Bordure RGB extrême -->
+        <div style="
+            position: absolute;
+            inset: -3px;
+            border-radius: 25px;
+            background: linear-gradient(
+                90deg,
+                #ff0064,
+                #8b7bff,
+                #00c8ff,
+                #ffd700,
+                #ff0064
+            );
+            background-size: 400% 400%;
+            animation: rgbBorder 5s linear infinite;
+            z-index: -2;
+            filter: blur(6px);
+            opacity: 0.8;
+        "></div>
+        
+        <!-- Texte principal -->
+        <span style="
+            position: relative;
+            z-index: 2;
+            display: block;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        ">
+            <span style="
+                background: linear-gradient(
+                    90deg,
+                    #00000067,
+                    #5745de,
+                    #ffd700
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                background-size: 200% 200%;
+                animation: addressTextGlow 4s ease infinite;
+                font-weight: 800;
+            ">
+                📍Black Rabbit
+            </span>
+            <span style="color: #000000; margin: 0 5px;">•</span>
+            <span style="
+                color: #ffd700;
+                font-weight: 600;
+            ">
+                R3QX+656, Kélibia
+            </span>
+        </span>
+        
+        <!-- Sous-texte -->
+        <span style="
+            position: relative;
+            z-index: 2;
+            display: block;
+            font-size: 0.85rem;
+            color: #f6f5ff;
+            margin-top: 5px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            opacity: 0.9;
+        ">
+            <span style="
+                animation: typing 3s steps(30) infinite;
+                overflow: hidden;
+                white-space: nowrap;
+                display: inline-block;
+            
+            ">
+                Cliquez pour localiser sur Google Maps
+            </span>
+        </span>
+    </a>
+</p>
+
+<style>
+    /* Animations améliorées */
+    @keyframes rgbBorder {
+        0% {
+            background-position: 0% 50%;
+            filter: blur(6px) hue-rotate(0deg);
+        }
+        50% {
+            background-position: 100% 50%;
+            filter: blur(8px) hue-rotate(180deg);
+        }
+        100% {
+            background-position: 0% 50%;
+            filter: blur(6px) hue-rotate(360deg);
+        }
+    }
+    
+    @keyframes addressTextGlow {
+        0%, 100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+    
+    @keyframes shineAddress {
+        0% {
+            left: -100%;
+        }
+        100% {
+            left: 200%;
+        }
+    }
+    
+    @keyframes locationPulse {
+        0%, 100% {
+            transform: translateX(-50%) scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: translateX(-50%) scale(1.2);
+            opacity: 0.8;
+        }
+    }
+    
+    @keyframes typing {
+        0% {
+            width: 0;
+        }
+        50% {
+            width: 100%;
+        }
+        100% {
+            width: 100%;
+        }
+    }
+    
+    /* Effets au survol */
+    #address-link:hover {
+        transform: translateY(-5px) scale(1.02) !important;
+        box-shadow: 
+            0 15px 40px rgba(139, 123, 255, 0.4),
+            0 0 0 3px rgba(255, 215, 0, 0.4),
+            inset 0 0 30px rgba(255, 255, 255, 0.1) !important;
+        border-color: rgba(255, 215, 0, 0.5) !important;
+    }
+    
+    #address-link:hover > div:nth-child(3) {
+        animation: rgbBorder 2s linear infinite !important;
+        opacity: 0.9 !important;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        #address-link {
+            padding: 10px 20px !important;
+            font-size: 1rem !important;
+        }
+        
+        #address-link span:first-child {
+            font-size: 1rem !important;
+        }
+        
+        #address-link span:last-child {
+            font-size: 0.8rem !important;
+        }
+    }
+</style>
+
+<script>
+    // Animation interactive
+    document.addEventListener('DOMContentLoaded', function() {
+        const addressLink = document.getElementById('address-link');
+        
+        addressLink.addEventListener('mouseenter', function() {
+            // Créer des particules RGB
+            for (let i = 0; i < 6; i++) {
+                createAddressParticle(this);
+            }
+        });
+        
+        function createAddressParticle(element) {
+            const particle = document.createElement('div');
+            const colors = ['#ff0064', '#8b7bff', '#00c8ff', '#ffd700'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            particle.style.cssText = `
+                position: absolute;
+                width: ${Math.random() * 6 + 2}px;
+                height: ${Math.random() * 6 + 2}px;
+                background: ${color};
+                border-radius: 50%;
+                top: ${Math.random() * 100}%;
+                left: ${Math.random() * 100}%;
+                pointer-events: none;
+                z-index: 1;
+                opacity: 0;
+            `;
+            
+            element.appendChild(particle);
+            
+            // Animation de la particule
+            particle.animate([
+                { 
+                    opacity: 0.8,
+                    transform: 'scale(1) translate(0, 0)' 
+                },
+                { 
+                    opacity: 0,
+                    transform: `scale(0) translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px)` 
+                }
+            ], {
+                duration: 600 + Math.random() * 400,
+                easing: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)'
+            }).onfinish = () => particle.remove();
+        }
+    });
+</script>
+</p>
         <p>☎️ +216 22 787 023</p>
         <p>⏰ Ouvert tous les jours </p>
         
@@ -2092,7 +2535,484 @@
                 </svg>
             </a>
         </div>
+        <div style="
+    margin-top: 2rem; 
+    padding-top: 1.5rem; 
+    border-top: 1px solid rgba(139, 123, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+">
+    <!-- Effet de particules en arrière-plan -->
+    <div style="
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 50% 50%, rgba(139, 123, 255, 0.05) 0%, transparent 70%);
+        z-index: -1;
+    "></div>
+    
+    <p style="
+        color: #8b7bff;
+        font-size: 0.85rem;
+        margin-bottom: 0.8rem;
+        text-align: center;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        animation: fadeInUp 0.8s ease-out;
+    ">
+        <span style="
+            display: inline-block;
+            animation: pulse 2s infinite;
+            margin-right: 5px;
+        ">✨</span>
+        DÉVELOPPÉ PAR
+        <span style="
+            display: inline-block;
+            animation: pulse 2s infinite 0.5s;
+            margin-left: 5px;
+        ">✨</span>
+    </p>
+    
+    <!-- Lien principal avec meilleure lisibilité -->
+     
+    <a href="https://www.instagram.com/aziz.mrika/" 
+   target="_blank" 
+   rel="noopener noreferrer"
+   id="developer-link"
+   style="
+       display: inline-flex;
+       align-items: center;
+       justify-content: center;
+       gap: 12px;
+       color: white;
+       text-decoration: none;
+       font-weight: 700;
+       font-size: 1.2rem;
+       padding: 12px 25px;
+       border-radius: 30px;
+       border: 2px solid rgba(255, 255, 255, 0.2);
+       background: linear-gradient(
+           135deg,
+           rgba(139, 123, 255, 0.15),
+           rgba(106, 91, 255, 0.15),
+           rgba(255, 215, 0, 0.15)
+       );
+       position: relative;
+       overflow: hidden;
+       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+       box-shadow: 
+           0 8px 25px rgba(139, 123, 255, 0.25),
+           0 0 0 1px rgba(255, 255, 255, 0.1);
+       backdrop-filter: blur(15px);
+       -webkit-backdrop-filter: blur(15px);
+       width: fit-content;
+       margin: 0 auto;
+       z-index: 1;
+   ">
+    <!-- Effet de brillance -->
+    <div style="
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+            transparent, 
+            rgba(255, 255, 255, 0.2), 
+            transparent);
+        animation: shine 3s infinite;
+    "></div>
+    
+    <!-- Icône Instagram UNIQUE et corrigée -->
+    <div style="
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at 30% 107%, 
+            #fdf497 0%, 
+            #fdf497 5%, 
+            #fd5949 45%, 
+            #d6249f 60%, 
+            #285AEB 90%
+        );
+        border-radius: 9px;
+        box-shadow: 
+            0 4px 12px rgba(214, 36, 159, 0.4),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+        animation: iconGlow 2s ease-in-out infinite;
+        flex-shrink: 0;
+    ">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2.162c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.162c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z" 
+                  fill="white"/>
+            <path d="M12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8z" 
+                  fill="white"/>
+            <circle cx="18.406" cy="5.594" r="1.44" fill="white"/>
+        </svg>
+    </div>
+    
+    <!-- Nom avec meilleur contraste -->
+    <span style="
+        position: relative;
+        z-index: 2;
+        color: #ffffff;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        text-shadow: 
+            0 2px 4px rgba(0, 0, 0, 0.5),
+            0 0 10px rgba(139, 123, 255, 0.5);
+        font-family: 'Segoe UI', 'Arial', sans-serif;
+        padding: 2px 0;
+        white-space: nowrap;
+    ">
+        <span style="
+            background: linear-gradient(90deg, 
+                #ffffff 0%, 
+                #ffd700 50%, 
+                #ffffff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: shimmerName 3s linear infinite;
+        ">
+            AZIZ MRIKA
+        </span>
+    </span>
+    
+    <!-- Bordure lumineuse -->
+    <div style="
+        position: absolute;
+        inset: -2px;
+        border-radius: 30px;
+        background: linear-gradient(
+            90deg,
+            #8b7bff,
+            #ffd700,
+            #8b7bff
+        );
+        background-size: 200% 200%;
+        animation: borderGlow 4s linear infinite;
+        z-index: -1;
+        filter: blur(5px);
+        opacity: 0.6;
+    "></div>
+</a>
+
+<style>
+    /* Animations CSS */
+    @keyframes shine {
+        0% {
+            left: -100%;
+        }
+        100% {
+            left: 200%;
+        }
+    }
+    
+    @keyframes shimmerName {
+        0% {
+            background-position: -200% center;
+        }
+        100% {
+            background-position: 200% center;
+        }
+    }
+    
+    @keyframes borderGlow {
+        0%, 100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+    
+    @keyframes iconGlow {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 
+                0 4px 12px rgba(214, 36, 159, 0.4),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+        }
+        50% {
+            transform: scale(1.05);
+            box-shadow: 
+                0 6px 18px rgba(214, 36, 159, 0.6),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+    }
+    
+    /* Effets au survol */
+    #developer-link:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 
+            0 15px 35px rgba(139, 123, 255, 0.4),
+            0 0 0 2px rgba(255, 215, 0, 0.3) !important;
+        border-color: rgba(255, 215, 0, 0.5) !important;
+    }
+    
+    #developer-link:hover span span {
+        animation: shimmerName 1s linear infinite !important;
+    }
+    
+    #developer-link:hover > div:first-child {
+        animation-duration: 1.5s !important;
+    }
+</style>
+    
+    <!-- Tagline -->
+    <p style="
+        color: #cccccc;
+        font-size: 0.9rem;
+        margin-top: 15px;
+        text-align: center;
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+        font-style: italic;
+        letter-spacing: 0.5px;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.4;
+        padding: 0 10px;
+    ">
+        <span style="
+            background: linear-gradient(90deg, #8b7bff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            animation: typing 3s steps(30) infinite;
+                overflow: hidden;
+                white-space: nowrap;
+                display: inline-block;
+                
+            
+        ">Développement web • Design UX/UI</span> 
         
+    </p>
+    
+    <!-- Étoiles de séparation -->
+    <div style="
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 12px;
+        animation: fadeIn 1s ease-out 0.4s both;
+    ">
+        <div style="
+            width: 4px;
+            height: 4px;
+            background: #8b7bff;
+            border-radius: 50%;
+            animation: dotPulse 1.5s infinite;
+        "></div>
+        <div style="
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: dotPulse 1.5s infinite 0.2s;
+        "></div>
+        <div style="
+            width: 4px;
+            height: 4px;
+            background: #8b7bff;
+            border-radius: 50%;
+            animation: dotPulse 1.5s infinite 0.4s;
+        "></div>
+    </div>
+</div>
+
+<style>
+    /* Animations CSS */
+    @keyframes shine {
+        0% {
+            left: -100%;
+        }
+        100% {
+            left: 200%;
+        }
+    }
+    
+    @keyframes shimmerName {
+        0% {
+            background-position: -200% center;
+        }
+        100% {
+            background-position: 200% center;
+        }
+    }
+    
+    @keyframes borderGlow {
+        0%, 100% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 0.7;
+            transform: scale(0.9);
+        }
+    }
+    
+    @keyframes iconPulse {
+        0%, 100% {
+            transform: scale(1);
+            box-shadow: 0 0 10px rgba(220, 39, 67, 0.5);
+        }
+        50% {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(220, 39, 67, 0.8);
+        }
+    }
+    
+    @keyframes dotPulse {
+        0%, 100% {
+            opacity: 0.3;
+            transform: scale(0.8);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+    }
+    
+    /* Effets au survol améliorés */
+    #developer-link:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 
+            0 15px 35px rgba(139, 123, 255, 0.4),
+            0 0 0 2px rgba(255, 215, 0, 0.3) !important;
+        border-color: rgba(255, 215, 0, 0.5) !important;
+    }
+    
+    #developer-link:hover span span {
+        animation: shimmerName 1s linear infinite !important;
+    }
+    
+    #developer-link:hover > div:first-child {
+        animation-duration: 1.5s !important;
+    }
+    
+    /* Responsive */
+    @media (max-width: 480px) {
+        #developer-link {
+            font-size: 1.1rem !important;
+            padding: 10px 20px !important;
+        }
+        
+        #developer-link > div:first-child {
+            width: 24px !important;
+            height: 24px !important;
+        }
+        
+        #developer-link svg {
+            width: 16px !important;
+            height: 16px !important;
+        }
+    }
+</style>
+
+<script>
+    // Animation au survol
+    document.addEventListener('DOMContentLoaded', function() {
+        const link = document.getElementById('developer-link');
+        
+        link.addEventListener('mouseenter', function() {
+            // Effet de particules simplifié
+            const particles = document.createElement('div');
+            particles.style.cssText = `
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 0;
+            `;
+            
+            // Créer quelques particules
+            for (let i = 0; i < 3; i++) {
+                const particle = document.createElement('div');
+                const size = Math.random() * 6 + 2;
+                const startX = Math.random() * 100;
+                const startY = Math.random() * 100;
+                
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${i === 0 ? '#ffd700' : i === 1 ? '#8b7bff' : '#ffffff'};
+                    border-radius: 50%;
+                    left: ${startX}%;
+                    top: ${startY}%;
+                    opacity: 0;
+                    animation: particleFloat 1s ease-out;
+                `;
+                
+                particles.appendChild(particle);
+                
+                // Supprimer après animation
+                setTimeout(() => particle.remove(), 1000);
+            }
+            
+            this.appendChild(particles);
+            
+            // Supprimer le conteneur de particules
+            setTimeout(() => particles.remove(), 1000);
+        });
+        
+        // Ajouter le CSS pour l'animation des particules
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes particleFloat {
+                0% {
+                    opacity: 0.8;
+                    transform: translate(0, 0) scale(1);
+                }
+                100% {
+                    opacity: 0;
+                    transform: translate(${Math.random() * 40 - 20}px, ${Math.random() * 40 - 20}px) scale(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    });
+</script>
         <p class="copyright">© 2026 Black Rabbit Coffee Shop - Tous droits réservés</p>
     </footer>
 
@@ -2370,10 +3290,23 @@
         window.addEventListener('error', function(e) {
             if (e.target.tagName === 'IMG') {
                 console.warn('Image non chargée:', e.target.src);
-                // Remplacer par une couleur de fond si l'image ne charge pas
-                const heroBg = document.querySelector('.hero-background');
-                if (heroBg) {
-                    heroBg.style.background = 'linear-gradient(45deg, #000, #1a1a1a, #000)';
+                // Remplacer par une couleur de fond ou image par défaut
+                e.target.style.display = 'none';
+                const parentCard = e.target.closest('.menu-card');
+                if (parentCard) {
+                    const defaultImg = document.createElement('div');
+                    defaultImg.style.width = '100%';
+                    defaultImg.style.height = '220px';
+                    defaultImg.style.background = 'linear-gradient(135deg, #8b7bff, #6a5bff)';
+                    defaultImg.style.borderRadius = '15px';
+                    defaultImg.style.display = 'flex';
+                    defaultImg.style.alignItems = 'center';
+                    defaultImg.style.justifyContent = 'center';
+                    defaultImg.style.color = 'white';
+                    defaultImg.style.fontSize = '1.2rem';
+                    defaultImg.style.fontWeight = 'bold';
+                    defaultImg.innerHTML = '🐰 BLACK RABBIT';
+                    parentCard.insertBefore(defaultImg, parentCard.firstChild);
                 }
             }
         }, true);
