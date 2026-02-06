@@ -1443,6 +1443,112 @@
         <section id="breakfast" class="menu-section active" aria-labelledby="breakfast-title">
             <div class="section-header">
                 <h2 class="section-title" id="breakfast-title">LES PETITS DÉJEUNER</h2>
+<div style="
+    text-align: center;
+    margin: 15px 0;
+    padding: 10px;
+">
+    <div style="
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        background: #f8fff8;
+        border: 2px solid #4CAF50;
+        padding: 12px 30px;
+        border-radius: 12px;
+        position: relative;
+        overflow: hidden;
+    ">
+        <!-- Icône animée -->
+        <span style="
+            font-size: 1.2rem;
+            animation: deliveryMove 2s infinite;
+        ">🚚</span>
+        
+        <!-- Texte -->
+        <span style="
+            font-weight: 600;
+            color: #2E7D32;
+            position: relative;
+        ">
+            <span style="
+                animation: typingWords 6s infinite;
+                display: inline-block;
+            ">
+                <span style="animation: fadeInWord 6s infinite;">Nos plats livrés chez vous disponible avec un supplément de 5 Dinars</span>
+                
+            </span>
+        </span>
+        
+        <!-- Point animé -->
+        <span style="
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            animation: pulseDot 1.5s infinite;
+            margin-left: 5px;
+        "></span>
+    </div>
+</div>
+
+<style>
+@keyframes deliveryMove {
+    0%, 100% {
+        transform: translateX(0) rotate(0);
+    }
+    25% {
+        transform: translateX(3px) rotate(-5deg);
+    }
+    75% {
+        transform: translateX(-3px) rotate(5deg);
+    }
+}
+
+@keyframes fadeInWord {
+    0%, 33% {
+        opacity: 0.3;
+    }
+    33%, 66% {
+        opacity: 1;
+    }
+    66%, 100% {
+        opacity: 1;
+    }
+}
+
+@keyframes pulseDot {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 0.7;
+    }
+}
+
+/* Effet de vague en arrière-plan */
+div[style*="background: #f8fff8"]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+    animation: wave 4s infinite;
+}
+
+@keyframes wave {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+</style>
             </div>
 
             <div class="menu-grid">
