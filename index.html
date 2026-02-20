@@ -1832,6 +1832,178 @@
         justify-content: center;
     }
 }
+/* ===== STYLES POUR LE PANIER AVEC POUBELLE À CÔTÉ DU + ===== */
+.cart-item-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Groupe pour les boutons (quantité + poubelle) */
+.cart-buttons-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 40px;
+    padding: 4px;
+}
+
+.cart-quantity {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(139, 123, 255, 0.15);
+    border-radius: 30px;
+    padding: 2px;
+}
+
+.cart-quantity button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(139, 123, 255, 0.3);
+    color: white;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.cart-quantity button:hover {
+    background: #8b7bff;
+    transform: scale(1.1);
+    border-color: #ffd700;
+}
+
+.cart-quantity span {
+    color: white;
+    font-weight: 700;
+    min-width: 30px;
+    text-align: center;
+    font-size: 1.1rem;
+}
+
+/* Icône poubelle à droite du + */
+.cart-item-remove {
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 68, 68, 0.2);
+    border: 1px solid #ff6b6b;
+    color: #ff6b6b;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 0;
+}
+
+.cart-item-remove:hover {
+    background: #ff4444;
+    color: white;
+    transform: scale(1.1) rotate(15deg);
+    border-color: white;
+}
+
+.cart-item-total {
+    color: #ffd700;
+    font-weight: 800;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #8b7bff20, #6a5bff20);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+/* Empêcher la fermeture du panier */
+.cart-quantity button,
+.cart-item-remove,
+.cart-clear,
+.cart-checkout,
+.cart-close {
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 1003;
+}
+
+.cart-sidebar {
+    pointer-events: auto !important;
+}
+
+.cart-sidebar * {
+    pointer-events: auto;
+}
+
+/* Style des articles du panier */
+.cart-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 15px;
+    border: 1px solid rgba(139, 123, 255, 0.2);
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.cart-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.cart-item-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffd700;
+    flex: 1;
+    padding-right: 10px;
+}
+
+.cart-item-price {
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    background: rgba(139, 123, 255, 0.2);
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.cart-item-desc {
+    font-size: 0.85rem;
+    color: #ccc;
+    margin-bottom: 10px;
+    font-style: italic;
+    padding-left: 5px;
+    border-left: 2px solid #8b7bff;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .cart-item-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .cart-buttons-group {
+        justify-content: center;
+    }
+    
+    .cart-item-total {
+        text-align: center;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -2094,13 +2266,13 @@
             <div class="menu-card ramadan-card">
                 <div class="item-title">
                     <span>*Bassbousa 9ichta</span>
-                    <span class="item-price ramadan-price">10 DT</span>
+                    <span class="item-price ramadan-price">8 DT</span>
                 </div>
             </div>
             <div class="menu-card ramadan-card">
                 <div class="item-title">
                     <span>Hriset Louz</span>
-                    <span class="item-price ramadan-price">12 DT</span>
+                    <span class="item-price ramadan-price">8 DT</span>
                 </div>
             </div>
         </div>
@@ -3874,6 +4046,7 @@ div[style*="background: #f8fff8"]::before {
             }).onfinish = () => particle.remove();
         }
     });
+    
 </script>
 </p>
         <p>☎️ +216 22 787 023</p>
@@ -4578,55 +4751,58 @@ class ShoppingCart {
         return this.items.reduce((count, item) => count + item.quantity, 0);
     }
 
-    // Mettre à jour l'interface
-    updateUI() {
-        const count = this.getItemCount();
-        document.querySelectorAll('#cartCount, #cartCountBadge').forEach(el => {
-            if (el) el.textContent = count;
-        });
+    // Dans votre classe ShoppingCart, remplacez la méthode updateUI par celle-ci :
+updateUI() {
+    const count = this.getItemCount();
+    document.querySelectorAll('#cartCount, #cartCountBadge').forEach(el => {
+        if (el) el.textContent = count;
+    });
 
-        const cartItemsContainer = document.getElementById('cartItems');
-        const cartTotalElement = document.getElementById('cartTotal');
-        
-        if (!cartItemsContainer || !cartTotalElement) return;
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cartTotalElement = document.getElementById('cartTotal');
+    
+    if (!cartItemsContainer || !cartTotalElement) return;
 
-        if (this.items.length === 0) {
-            cartItemsContainer.innerHTML = `
-                <div class="cart-empty">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <circle cx="9" cy="21" r="1" fill="currentColor"/>
-                        <circle cx="20" cy="21" r="1" fill="currentColor"/>
-                        <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
-                    </svg>
-                    <p>Votre panier est vide</p>
-                    <small>Ajoutez de délicieux articles depuis notre menu</small>
+    if (this.items.length === 0) {
+        cartItemsContainer.innerHTML = `
+            <div class="cart-empty">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <circle cx="9" cy="21" r="1" fill="currentColor"/>
+                    <circle cx="20" cy="21" r="1" fill="currentColor"/>
+                    <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/>
+                </svg>
+                <p>Votre panier est vide</p>
+                <small>Ajoutez de délicieux articles depuis notre menu</small>
+            </div>
+        `;
+    } else {
+        cartItemsContainer.innerHTML = this.items.map((item, index) => `
+            <div class="cart-item">
+                <div class="cart-item-header">
+                    <span class="cart-item-title">${this.escapeHtml(item.name)}</span>
+                    <span class="cart-item-price">${item.price} DT</span>
                 </div>
-            `;
-        } else {
-            cartItemsContainer.innerHTML = this.items.map((item, index) => `
-                <div class="cart-item">
-                    <button class="cart-item-remove" onclick="cart.removeItem(${index})" title="Supprimer">×</button>
-                    <div class="cart-item-header">
-                        <span class="cart-item-title">${this.escapeHtml(item.name)}</span>
-                        <span class="cart-item-price">${item.price} DT</span>
-                    </div>
-                    ${item.size ? `<div class="cart-item-desc">📏 Taille: ${item.size}</div>` : ''}
-                    <div class="cart-item-controls">
+                ${item.size ? `<div class="cart-item-desc">📏 ${this.escapeHtml(item.size)}</div>` : ''}
+                <div class="cart-item-controls">
+                    <div class="cart-buttons-group">
                         <div class="cart-quantity">
-                            <button onclick="cart.updateQuantity(${index}, -1)">−</button>
+                            <button onclick="event.stopPropagation(); cart.updateQuantity(${index}, -1)">−</button>
                             <span>${item.quantity}</span>
-                            <button onclick="cart.updateQuantity(${index}, 1)">+</button>
+                            <button onclick="event.stopPropagation(); cart.updateQuantity(${index}, 1)">+</button>
                         </div>
-                        <div class="cart-item-total">
-                            ${(parseFloat(item.price) * item.quantity).toFixed(3)} DT
-                        </div>
+                        <!-- ICÔNE POUBELLE À DROITE DU BOUTON + -->
+                        <button class="cart-item-remove" onclick="event.stopPropagation(); cart.removeItem(${index})" title="Supprimer">🗑️</button>
+                    </div>
+                    <div class="cart-item-total">
+                        ${(parseFloat(item.price) * item.quantity).toFixed(3)} DT
                     </div>
                 </div>
-            `).join('');
-        }
-
-        cartTotalElement.textContent = this.getTotal().toFixed(3) + ' DT';
+            </div>
+        `).join('');
     }
+
+    cartTotalElement.textContent = this.getTotal().toFixed(3) + ' DT';
+}
 
     escapeHtml(text) {
         const div = document.createElement('div');
@@ -4828,8 +5004,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') closeCart();
     });
     
-    document.addEventListener('click', (e) => {
-        const cartSidebar = document.getElementById('cartSidebar');
+// Remplacer l'event listener pour les clics à l'extérieur
+document.addEventListener('click', function(e) {
+    const cartSidebar = document.getElementById('cartSidebar');
+    const cartToggle = document.getElementById('cartToggle');
+    
+    // Liste de tous les éléments qui ne doivent PAS fermer le panier
+    const isCartButton = 
+        e.target.closest('.cart-quantity button') ||    // boutons + et -
+        e.target.closest('.cart-item-remove') ||        // bouton poubelle
+        e.target.closest('.cart-clear') ||              // bouton vider
+        e.target.closest('.cart-checkout') ||           // bouton commander
+        e.target.closest('.cart-close') ||              // bouton fermer (X)
+        e.target.closest('.cart-item');                  // l'article lui-même
+    
+    // Ne fermer que si le clic est en dehors du panier ET pas sur un bouton du panier
+    if (cartSidebar.classList.contains('open') && 
+        !cartSidebar.contains(e.target) && 
+        !cartToggle.contains(e.target)) {
+        closeCart();
+    }
+});        const cartSidebar = document.getElementById('cartSidebar');
         const cartToggle = document.getElementById('cartToggle');
         
         if (cartSidebar.classList.contains('open') && 
@@ -4838,7 +5033,7 @@ document.addEventListener('DOMContentLoaded', () => {
             closeCart();
         }
     });
-});
+;
 
 // Observer les nouvelles cartes
 const observer = new MutationObserver((mutations) => {
@@ -5270,5 +5465,6 @@ observer.observe(document.body, {
 <div class="cart-notification" id="cartNotification">
     ✅ Article ajouté au panier
 </div>
+
 </body>
 </html>
