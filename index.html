@@ -2003,6 +2003,183 @@
         text-align: center;
     }
 }
+/* ===== SÉLECTEUR DE TAILLE ===== */
+.size-options { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+
+.size-badge {
+    background: rgba(139,123,255,0.15);
+    border: 2px solid rgba(139,123,255,0.3);
+    color: #ccc;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 70px;
+    text-align: center;
+}
+.size-badge.selected {
+    background: linear-gradient(135deg, rgba(139,123,255,0.5), rgba(106,91,255,0.5));
+    border-color: #ffd700;
+    color: #ffd700;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(255,215,0,0.3);
+}
+.cart-toggle {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+    border: none;
+    background: none;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cart-toggle:hover {
+    transform: scale(1.12) translateY(-4px);
+}
+
+.cart-toggle:active {
+    transform: scale(0.95);
+}
+
+.cart-toggle-inner {
+    position: relative;
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8b7bff 0%, #6a5bff 50%, #5040ee 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0 8px 25px rgba(139, 123, 255, 0.5),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+    z-index: 2;
+    transition: box-shadow 0.3s ease;
+}
+
+.cart-toggle:hover .cart-toggle-inner {
+    box-shadow:
+        0 15px 40px rgba(139, 123, 255, 0.7),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.cart-toggle-inner svg {
+    color: white;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Badge compteur */
+.cart-count {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: linear-gradient(135deg, #ffd700, #ffaa00);
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 900;
+    min-width: 22px;
+    height: 22px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #0a0a0a;
+    box-shadow: 0 3px 8px rgba(255, 170, 0, 0.5);
+    animation: badgePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: 0 4px;
+}
+
+@keyframes badgePop {
+    0% { transform: scale(0); }
+    70% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Anneau tournant */
+.cart-toggle-ring {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: conic-gradient(
+        #8b7bff 0deg,
+        #ffd700 90deg,
+        #8b7bff 180deg,
+        #ffd700 270deg,
+        #8b7bff 360deg
+    );
+    animation: ringRotate 3s linear infinite;
+    z-index: 1;
+    opacity: 0.7;
+}
+
+.cart-toggle-ring::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: #0a0a0a;
+}
+
+@keyframes ringRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Halo lumineux */
+.cart-toggle-glow {
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,123,255,0.3) 0%, transparent 70%);
+    animation: glowPulseCart 2s ease-in-out infinite;
+    z-index: 0;
+}
+
+@keyframes glowPulseCart {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* Animation quand un article est ajouté */
+.cart-toggle.item-added .cart-toggle-inner {
+    animation: cartBounce 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes cartBounce {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.25) rotate(-10deg); }
+    70% { transform: scale(0.95) rotate(5deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+@media (max-width: 480px) {
+    .cart-toggle {
+        bottom: 80px;
+        right: 15px;
+        width: 54px;
+        height: 54px;
+    }
+    .cart-toggle-inner {
+        width: 54px;
+        height: 54px;
+    }
+}
 
     </style>
 </head>
@@ -3057,7 +3234,7 @@ div[style*="background: #f8fff8"]::before {
                 </div>
                 <div class="menu-card">
                    <!-- Version corrigée -->
-<img src="Latte.jpeg" alt="Latte" class="item-image" style="width: 80%;">
+<img src="Latte.jpeg" alt="Latte" class="item-image" style="width: 95%;">
                     <div class="item-title">
                         <span>Latte Macchiato</span>
                     </div>
@@ -4046,7 +4223,14 @@ div[style*="background: #f8fff8"]::before {
             }).onfinish = () => particle.remove();
         }
     });
-    
+    // Animation bounce sur le bouton panier
+const toggle = document.getElementById('cartToggle');
+if (toggle) {
+    toggle.classList.remove('item-added');
+    void toggle.offsetWidth; // reset animation
+    toggle.classList.add('item-added');
+    setTimeout(() => toggle.classList.remove('item-added'), 500);
+}
 </script>
 </p>
         <p>☎️ +216 22 787 023</p>
@@ -4890,11 +5074,29 @@ function initializeProductControls() {
 function addQuantityControls(card) {
     if (card.querySelector('.product-quantity-controls')) return;
     
-    const price = getProductPrice(card);
+    // Rendre les size-badges cliquables
+    const sizeBadges = card.querySelectorAll('.size-badge');
+    if (sizeBadges.length > 1) {
+        // Sélectionner le premier par défaut
+        sizeBadges[0].classList.add('selected');
+        sizeBadges.forEach(badge => {
+            badge.addEventListener('click', function() {
+                card.querySelectorAll('.size-badge').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                // Mettre à jour le total affiché
+                const priceText = this.textContent;
+                const priceMatch = priceText.match(/(\d+(?:[.,]\d+)?)/);
+                const price = priceMatch ? parseFloat(priceMatch[1].replace(',', '.')) : 0;
+                const qty = productQuantities.get(card.id) || 1;
+                const totalDisplay = document.getElementById(`total-${card.id}`);
+                if (totalDisplay) totalDisplay.textContent = (price * qty).toFixed(2) + ' DT';
+            });
+        });
+    }
     
+    const price = getProductPrice(card);
     const controlsDiv = document.createElement('div');
     controlsDiv.className = 'product-quantity-controls';
-    
     controlsDiv.innerHTML = `
         <div class="quantity-buttons">
             <button class="quantity-btn minus" onclick="updateProductQuantity('${card.id}', -1)">−</button>
@@ -4906,7 +5108,7 @@ function addQuantityControls(card) {
     
     const addButton = document.createElement('button');
     addButton.className = 'add-to-cart-btn-card';
-    addButton.innerHTML = '🛒 Ajouter';
+    addButton.innerHTML = sizeBadges.length > 1 ? '🛒 Choisir & Ajouter' : '🛒 Ajouter';
     addButton.onclick = () => addToCartFromCard(card.id);
     
     controlsDiv.appendChild(addButton);
@@ -4924,10 +5126,19 @@ function updateProductQuantity(cardId, change) {
     
     const card = document.getElementById(cardId);
     if (card) {
-        const price = getProductPrice(card);
+        // Utiliser la taille SÉLECTIONNÉE si elle existe, sinon le prix par défaut
+        let price;
+        const selectedBadge = card.querySelector('.size-badge.selected');
+        if (selectedBadge) {
+            const priceMatch = selectedBadge.textContent.match(/(\d+(?:[.,]\d+)?)/);
+            price = priceMatch ? parseFloat(priceMatch[1].replace(',', '.')) : 0;
+        } else {
+            price = getProductPrice(card);
+        }
+        
         const totalDisplay = document.getElementById(`total-${cardId}`);
         if (totalDisplay) {
-            totalDisplay.textContent = (price * newQty).toFixed(3) + ' DT';
+            totalDisplay.textContent = (price * newQty).toFixed(2) + ' DT';
         }
     }
 }
@@ -4966,16 +5177,58 @@ function getProductSize(card) {
 function addToCartFromCard(cardId) {
     const card = document.getElementById(cardId);
     if (!card) return;
+
+    const sizeOptions = card.querySelectorAll('.size-badge');
     
+    // Si produit avec plusieurs tailles → vérifier qu'une est sélectionnée
+    if (sizeOptions.length > 1) {
+        const selected = card.querySelector('.size-badge.selected');
+        if (!selected) {
+            // Flasher les boutons pour indiquer qu'il faut choisir
+            sizeOptions.forEach(b => {
+                b.style.border = '2px solid #ff4444';
+                b.style.animation = 'shake 0.3s ease';
+            });
+            setTimeout(() => {
+                sizeOptions.forEach(b => {
+                    b.style.border = '';
+                    b.style.animation = '';
+                });
+            }, 800);
+            cart.showNotification('⚠️ Choisissez une taille !');
+            return;
+        }
+        
+        // Extraire le prix de la taille sélectionnée
+        const priceText = selected.textContent;
+        const priceMatch = priceText.match(/(\d+(?:[.,]\d+)?)/);
+        const price = priceMatch ? parseFloat(priceMatch[1].replace(',', '.')) : 0;
+        const quantity = productQuantities.get(cardId) || 1;
+        const name = getProductName(card);
+        
+        cart.addItem({
+            id: `${name}-${selected.textContent}-${Date.now()}`,
+            name: name,
+            price: price,
+            size: selected.textContent,
+            quantity: quantity
+        });
+        
+        // Reset sélection
+        sizeOptions.forEach(b => b.classList.remove('selected'));
+        productQuantities.set(cardId, 1);
+        updateProductQuantity(cardId, 0);
+        return;
+    }
+    
+    // Produit simple (1 seul prix) — comportement original
     const quantity = productQuantities.get(cardId) || 1;
     const name = getProductName(card);
     const price = getProductPrice(card);
     const size = getProductSize(card);
     
-    const id = `${name}-${size}-${Date.now()}`;
-    
     cart.addItem({
-        id: id,
+        id: `${name}-${size}-${Date.now()}`,
         name: name,
         price: price,
         size: size,
@@ -4989,10 +5242,7 @@ function addToCartFromCard(cardId) {
     if (addButton) {
         addButton.style.transform = 'scale(0.95)';
         addButton.style.background = 'linear-gradient(135deg, #4CAF50, #45a049)';
-        setTimeout(() => {
-            addButton.style.transform = '';
-            addButton.style.background = '';
-        }, 200);
+        setTimeout(() => { addButton.style.transform = ''; addButton.style.background = ''; }, 200);
     }
 }
 
@@ -5455,10 +5705,13 @@ observer.observe(document.body, {
     </div>
 </div>
 
-<!-- Bouton panier flottant -->
 <div class="cart-toggle" onclick="toggleCart()" id="cartToggle">
-    🛒
-    <span class="cart-count" id="cartCountBadge">0</span>
+    <div class="cart-toggle-inner">
+        🛒
+        <span class="cart-count" id="cartCountBadge">0</span>
+    </div>
+    <div class="cart-toggle-ring"></div>
+    <div class="cart-toggle-glow"></div>
 </div>
 
 <!-- Notification d'ajout au panier -->
